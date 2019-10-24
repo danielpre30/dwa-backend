@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true
       },
       comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
       },
       createdAt: {
@@ -31,12 +31,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         field: 'deleted_at'
       }
+    },
+    options: {
+      timestamps: true,
+      paranoid: true,
+      underscored: true
     }
   }
   const Comment = sequelize.define(
     tableName,
     commentSchema.attributes,
-    {}
+    commentSchema.options
   )
 
   Comment.associate = function (models) {
