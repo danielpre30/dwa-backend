@@ -14,7 +14,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       comment: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          isLength: {
+            max: 100,
+            msg: 'comment max length is 100'
+          }
+        }
       },
       createdAt: {
         allowNull: false,

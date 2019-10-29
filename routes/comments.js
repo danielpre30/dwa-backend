@@ -1,25 +1,34 @@
 const express = require('express')
 const router = express.Router()
 const { comments: Comment } = require('../models')
+const jwt = require('express-jwt')
+const { secret } = require('../config')
 
 /* GET comments listing. */
-router.get('/', async function (req, res, next) {
+router.get('/', jwt({ secret }), async function (req, res, next) {
   let comments = null
-  try {
-    comments = await Comment.findAll()
-  } catch (err) {
-    res.json({
-      ok: false,
-      message: err.message
-    })
-    return
-  }
+  const { user } = req
 
-  res.json({
-    ok: true,
-    comments,
-    message: 'comments success'
-  })
+  if (user) {
+    try {
+      comments = await Comment.findAll()
+    } catch (err) {
+      res.statusCode = 500
+      res.json({
+        ok: false,
+        message: err.message
+      })
+      return
+    }
+
+    res.json({
+      ok: true,
+      comments,
+      message: 'comments success'
+    })
+  } else {
+    return next(new Error('Unauthorize'))
+  }
 })
 
 /* POST create a comment */
