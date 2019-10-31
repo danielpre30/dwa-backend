@@ -1,9 +1,9 @@
 'use strict'
 
-const tableName = 'comments'
+const tableName = 'Players'
 
 module.exports = (sequelize, DataTypes) => {
-  const commentSchema = {
+  const playerSchema = {
     tableName,
     attributes: {
       id: {
@@ -12,15 +12,35 @@ module.exports = (sequelize, DataTypes) => {
         allowFalse: false,
         primaryKey: true
       },
-      comment: {
-        type: DataTypes.TEXT,
+      name: {
+        type: DataTypes.STRING(50),
         allowNull: false,
         validate: {
           isLength: {
-            max: 100,
-            msg: 'comment max length is 100'
+            max: 45,
+            msg: 'player max length is 100'
           }
         }
+      },
+      ranking: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      country: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      birth: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      weight: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+      },
+      height: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -44,14 +64,13 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   }
-  const Comment = sequelize.define(
+  const Player = sequelize.define(
     tableName,
-    commentSchema.attributes,
-    commentSchema.options
+    playerSchema.attributes,
+    playerSchema.options
   )
-
-  Comment.associate = function (models) {
+  Player.associate = function (models) {
     // associations can be defined here
   }
-  return Comment
+  return Player
 }

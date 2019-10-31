@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "Ad123456",
-    "database": "comments",
+    "database": "players",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false

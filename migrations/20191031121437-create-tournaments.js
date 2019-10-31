@@ -2,39 +2,40 @@
 
 const Sequelize = require('sequelize')
 
-const tableName = 'comments'
+const tableName = 'Tournaments'
 
 const attributes = {
   id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowFalse: false,
-    primaryKey: true
-  },
-  comment: {
-    type: Sequelize.TEXT,
     allowNull: false,
-    validate: {
-      isLength: {
-        max: 100,
-        msg: 'comment max length is 100'
-      }
-    }
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  nombre: {
+    type: Sequelize.STRING,
+    allowNull: false
+
+  },
+  pais: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  superficie: {
+    type: Sequelize.STRING,
+    allowNull: false
+
+  },
+  pista: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   createdAt: {
     allowNull: false,
-    type: Sequelize.DATE,
-    field: 'created_at'
+    type: Sequelize.DATE
   },
   updatedAt: {
     allowNull: false,
-    type: Sequelize.DATE,
-    field: 'updated_at'
-  },
-  deletedAt: {
-    allowNull: true,
-    type: Sequelize.DATE,
-    field: 'deleted_at'
+    type: Sequelize.DATE
   }
 }
 

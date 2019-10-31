@@ -22,7 +22,7 @@ switch (process.env.NODE_ENV) {
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
-const commentsRouter = require('./routes/comments')
+const playersRouter = require('./routes/players')
 
 /**
  * config database
@@ -41,7 +41,7 @@ function connect () {
   sequelize
     .authenticate()
     .then(() => {
-      console.log('Connection has been established successfully.')
+      console.log('Connection has been established successfully')
     })
     .catch(err => {
       console.error('Unable to connect to the database:', err)
@@ -72,6 +72,6 @@ app.use(function (err, req, res, next) {
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
-app.use('/comments', commentsRouter)
+app.use('/players', playersRouter)
 
 module.exports = app
